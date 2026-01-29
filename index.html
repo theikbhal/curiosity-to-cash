@@ -13,44 +13,93 @@
 
     body {
       margin: 0;
-      background: #0f172a;
+      min-height: 100vh;
       color: #e5e7eb;
+      background: linear-gradient(120deg, #020617, #0f172a, #020617);
+      background-size: 300% 300%;
+      animation: bgMove 18s ease infinite;
+      overflow-x: hidden;
+    }
+
+    @keyframes bgMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* floating curiosity objects */
+    .float {
+      position: fixed;
+      font-size: 20px;
+      opacity: 0.15;
+      animation: drift 12s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    .float:nth-child(1) { top: 20%; left: -10%; animation-duration: 14s; }
+    .float:nth-child(2) { top: 45%; left: -15%; animation-duration: 18s; }
+    .float:nth-child(3) { top: 70%; left: -12%; animation-duration: 22s; }
+
+    @keyframes drift {
+      from { transform: translateX(0); }
+      to   { transform: translateX(120vw); }
     }
 
     header {
-      padding: 16px;
+      position: relative;
+      padding: 18px 16px;
       text-align: center;
-      background: #020617;
+      background: rgba(2,6,23,0.75);
+      backdrop-filter: blur(6px);
       border-bottom: 1px solid #1e293b;
     }
 
+    .coffee-btn {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 8px 16px;
+      font-size: 0.85rem;
+      background: #facc15;
+      color: #000;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
     header h1 {
-      font-size: 1.4rem;
-      margin: 0;
+      font-size: 1.6rem;
+      margin: 6px 0 4px;
     }
 
     header p {
       font-size: 0.9rem;
       color: #94a3b8;
-      margin-top: 6px;
+      margin: 0;
     }
 
     main {
       padding: 16px;
       max-width: 600px;
       margin: auto;
+      position: relative;
+      z-index: 2;
     }
 
     .card {
-      background: #020617;
+      background: rgba(2,6,23,0.85);
       border: 1px solid #1e293b;
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 14px;
       margin-bottom: 12px;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
     }
 
     .card span {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: #38bdf8;
       font-weight: 600;
     }
@@ -58,7 +107,7 @@
     .card p {
       margin: 6px 0 0;
       font-size: 0.95rem;
-      line-height: 1.4;
+      line-height: 1.45;
     }
 
     footer {
@@ -72,7 +121,15 @@
 
 <body>
 
+  <!-- curiosity floating objects (no eyes) -->
+  <div class="float">◯</div>
+  <div class="float">△</div>
+  <div class="float">⬡</div>
+
   <header>
+    <a href="https://buymeacoffee.com/theikbhal" target="_blank" class="coffee-btn">
+      ☕ Buy me a coffee
+    </a>
     <h1>Curiosity → Cash</h1>
     <p>Real solo founders who monetized curiosity</p>
   </header>
@@ -82,30 +139,29 @@
   </main>
 
   <footer>
-    Built in public • Single HTML + JSON
+    Built in public • Curiosity-driven • HTML + JSON
   </footer>
 
   <script>
     fetch("data.json")
       .then(res => res.json())
       .then(data => {
-        const container = document.getElementById("list");
-        container.innerHTML = "";
+        const list = document.getElementById("list");
+        list.innerHTML = "";
 
         data.forEach(item => {
-          const div = document.createElement("div");
-          div.className = "card";
-          div.innerHTML = `
+          const card = document.createElement("div");
+          card.className = "card";
+          card.innerHTML = `
             <span>#${item.id}</span>
             <p>${item.text}</p>
           `;
-          container.appendChild(div);
+          list.appendChild(card);
         });
       })
-      .catch(err => {
+      .catch(() => {
         document.getElementById("list").innerHTML =
           "<p>Failed to load data.</p>";
-        console.error(err);
       });
   </script>
 
