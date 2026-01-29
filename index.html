@@ -14,49 +14,50 @@
     body {
       margin: 0;
       min-height: 100vh;
-      color: #e5e7eb;
-      background: linear-gradient(to bottom, #020617, #0f172a 40%, #020617);
+      color: #3f3f46;
+      background: linear-gradient(to bottom, #fefcf8, #f3f4f6 40%, #eef2f3);
       overflow-x: hidden;
     }
 
-    /* ---------- MIST LAYER ---------- */
+    /* ---------- MIST ---------- */
     .mist {
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at bottom, rgba(255,255,255,0.06), transparent 60%);
-      animation: mistMove 20s ease-in-out infinite;
+      background: radial-gradient(circle at bottom, rgba(200,200,200,0.25), transparent 60%);
+      animation: mistMove 22s ease-in-out infinite;
       pointer-events: none;
     }
 
     @keyframes mistMove {
       0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
+      50% { transform: translateY(-10px); }
     }
 
-    /* ---------- RAIN ---------- */
+    /* ---------- LIGHT RAIN ---------- */
     .rain {
       position: fixed;
       inset: 0;
       background-image: linear-gradient(
-        rgba(255,255,255,0.05) 1px,
+        rgba(160,160,160,0.25) 1px,
         transparent 1px
       );
-      background-size: 2px 18px;
-      animation: rainFall 1.5s linear infinite;
+      background-size: 2px 20px;
+      animation: rainFall 1.8s linear infinite;
       pointer-events: none;
-      opacity: 0.15;
+      opacity: 0.18;
     }
 
     @keyframes rainFall {
       from { background-position: 0 0; }
-      to { background-position: 0 18px; }
+      to { background-position: 0 20px; }
     }
 
-    /* ---------- FLOATING GROUPS ---------- */
+    /* ---------- NATURE GROUPS ---------- */
     .group {
       position: fixed;
-      opacity: 0.22;
+      opacity: 0.35;
       pointer-events: none;
+      font-size: 20px;
     }
 
     .trees {
@@ -68,40 +69,40 @@
     .mountains {
       bottom: 10%;
       right: 6%;
-      opacity: 0.18;
+      opacity: 0.28;
     }
 
     .clouds {
-      top: 18%;
+      top: 16%;
       left: 10%;
-      animation: cloudFloat 14s ease-in-out infinite;
+      animation: cloudFloat 16s ease-in-out infinite;
     }
 
     .sun {
       top: 8%;
       right: 12%;
-      animation: glow 8s ease-in-out infinite;
+      animation: glow 9s ease-in-out infinite;
     }
 
     .birds {
-      top: 32%;
-      right: 20%;
+      top: 34%;
+      right: 22%;
       animation: birdFloat 10s ease-in-out infinite;
     }
 
     @keyframes sway {
       0%,100% { transform: rotate(0deg); }
-      50% { transform: rotate(1.5deg); }
+      50% { transform: rotate(1.2deg); }
     }
 
     @keyframes cloudFloat {
       0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      50% { transform: translateY(-8px); }
     }
 
     @keyframes glow {
-      0%,100% { transform: scale(1); opacity: 0.25; }
-      50% { transform: scale(1.08); opacity: 0.35; }
+      0%,100% { transform: scale(1); opacity: 0.4; }
+      50% { transform: scale(1.08); opacity: 0.55; }
     }
 
     @keyframes birdFloat {
@@ -112,9 +113,9 @@
     header {
       padding: 18px 16px;
       text-align: center;
-      background: rgba(2,6,23,0.82);
+      background: rgba(255,255,255,0.75);
       backdrop-filter: blur(6px);
-      border-bottom: 1px solid #1e293b;
+      border-bottom: 1px solid #e5e7eb;
       position: relative;
       z-index: 2;
     }
@@ -124,8 +125,8 @@
       margin-bottom: 10px;
       padding: 8px 16px;
       font-size: 0.85rem;
-      background: #facc15;
-      color: #000;
+      background: #fde68a;
+      color: #78350f;
       border-radius: 999px;
       text-decoration: none;
       font-weight: 600;
@@ -134,11 +135,12 @@
     header h1 {
       font-size: 1.6rem;
       margin: 6px 0 4px;
+      color: #111827;
     }
 
     header p {
       font-size: 0.9rem;
-      color: #94a3b8;
+      color: #6b7280;
       margin: 0;
     }
 
@@ -151,8 +153,8 @@
     }
 
     .card {
-      background: rgba(2,6,23,0.86);
-      border: 1px solid #1e293b;
+      background: rgba(255,255,255,0.85);
+      border: 1px solid #e5e7eb;
       border-radius: 14px;
       padding: 14px;
       margin-bottom: 12px;
@@ -161,12 +163,12 @@
 
     .card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 30px rgba(56,189,248,0.12);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
     }
 
     .card span {
       font-size: 0.75rem;
-      color: #38bdf8;
+      color: #2563eb;
       font-weight: 600;
     }
 
@@ -174,13 +176,14 @@
       margin: 6px 0 0;
       font-size: 0.95rem;
       line-height: 1.45;
+      color: #374151;
     }
 
     footer {
       text-align: center;
       padding: 14px;
       font-size: 0.75rem;
-      color: #64748b;
+      color: #6b7280;
       position: relative;
       z-index: 2;
     }
@@ -193,7 +196,7 @@
   <div class="mist"></div>
   <div class="rain"></div>
 
-  <!-- nature groups -->
+  <!-- nature elements -->
   <div class="group trees">🌲 🌲 🌳</div>
   <div class="group mountains">⛰️ ⛰️</div>
   <div class="group clouds">☁️ ☁️ ☁️</div>
