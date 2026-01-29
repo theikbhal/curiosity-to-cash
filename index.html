@@ -15,43 +15,57 @@
       margin: 0;
       min-height: 100vh;
       color: #e5e7eb;
-      background: linear-gradient(120deg, #020617, #0f172a, #020617);
-      background-size: 300% 300%;
-      animation: bgMove 18s ease infinite;
+      background: radial-gradient(circle at top, #0f172a, #020617 70%);
       overflow-x: hidden;
     }
 
-    @keyframes bgMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* floating curiosity objects */
-    .float {
+    /* --- soft animated background blobs --- */
+    .blob {
       position: fixed;
-      font-size: 20px;
-      opacity: 0.15;
-      animation: drift 12s ease-in-out infinite alternate;
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, #38bdf8, transparent 70%);
+      opacity: 0.12;
+      filter: blur(40px);
+      animation: breathe 16s ease-in-out infinite;
       pointer-events: none;
     }
 
-    .float:nth-child(1) { top: 20%; left: -10%; animation-duration: 14s; }
-    .float:nth-child(2) { top: 45%; left: -15%; animation-duration: 18s; }
-    .float:nth-child(3) { top: 70%; left: -12%; animation-duration: 22s; }
+    .blob.one { top: 10%; left: 5%; }
+    .blob.two { bottom: 15%; right: 8%; animation-delay: -6s; }
 
-    @keyframes drift {
-      from { transform: translateX(0); }
-      to   { transform: translateX(120vw); }
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.25); }
+    }
+
+    /* --- curiosity objects (in-place motion) --- */
+    .curious {
+      position: fixed;
+      font-size: 22px;
+      opacity: 0.2;
+      animation: float 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .curious.one { top: 30%; left: 8%; animation-delay: 0s; }
+    .curious.two { top: 55%; right: 10%; animation-delay: -2s; }
+    .curious.three { bottom: 18%; left: 40%; animation-delay: -4s; }
+
+    @keyframes float {
+      0%   { transform: translateY(0) rotate(0deg) scale(1); }
+      50%  { transform: translateY(-8px) rotate(6deg) scale(1.05); }
+      100% { transform: translateY(0) rotate(0deg) scale(1); }
     }
 
     header {
-      position: relative;
       padding: 18px 16px;
       text-align: center;
-      background: rgba(2,6,23,0.75);
+      background: rgba(2,6,23,0.8);
       backdrop-filter: blur(6px);
       border-bottom: 1px solid #1e293b;
+      position: relative;
+      z-index: 2;
     }
 
     .coffee-btn {
@@ -91,11 +105,12 @@
       border-radius: 14px;
       padding: 14px;
       margin-bottom: 12px;
-      transition: transform 0.2s ease;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
     .card:hover {
-      transform: translateY(-2px);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(56,189,248,0.1);
     }
 
     .card span {
@@ -115,16 +130,22 @@
       padding: 14px;
       font-size: 0.75rem;
       color: #64748b;
+      position: relative;
+      z-index: 2;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- curiosity floating objects (no eyes) -->
-  <div class="float">◯</div>
-  <div class="float">△</div>
-  <div class="float">⬡</div>
+  <!-- animated background -->
+  <div class="blob one"></div>
+  <div class="blob two"></div>
+
+  <!-- curiosity objects (no eyes) -->
+  <div class="curious one">◯</div>
+  <div class="curious two">△</div>
+  <div class="curious three">⬡</div>
 
   <header>
     <a href="https://buymeacoffee.com/theikbhal" target="_blank" class="coffee-btn">
